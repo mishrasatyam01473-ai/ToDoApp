@@ -102,3 +102,26 @@ npx expo start
 3. The generated APK will be located at:
    `android/app/build/outputs/apk/release/app-release.apk`
 
+---
+
+## 📥 Direct APK Download & Installation
+
+You can download and install the app directly on your Android phone using the APK file provided in this repository:
+
+### 📲 [Download ToDo.apk (Direct Download)](./ToDo.apk)
+
+| Detail | Value |
+| :--- | :--- |
+| **File** | [`ToDo.apk`](./ToDo.apk) |
+| **Package** | `com.satyammishra.todoapp` |
+| **App Name** | `Daily Track & Achieve` |
+| **Version** | `1.0.0` |
+| **Access Gate Code** | `SatyamMishraToDoApp2026` |
+| **Compatibility** | Android 8.0+ (Oreo to Android 15) |
+
+### 🚀 3-Step Phone Installation:
+1. **Download**: Click [**`ToDo.apk`**](./ToDo.apk) above (or tap **View Raw** / **Download** on GitHub).
+2. **Install**: Open the downloaded file on your Android device (if prompted, toggle *"Allow from this source"*).
+3. **Launch & Unlock**: Open the app and enter the personal access code **`SatyamMishraToDoApp2026`** to unlock your dashboard!
+
+
