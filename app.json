@@ -1,24 +1,43 @@
 {
   "expo": {
-    "name": "ToDoApp",
-    "slug": "ToDoApp",
+    "name": "Daily Track & Achieve",
+    "slug": "daily-todo-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "scheme": "todoapp",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "backgroundColor": "#0D9488"
+    },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.satyammishra.todoapp"
     },
     "android": {
+      "package": "com.satyammishra.todoapp",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
-      }
+      },
+      "permissions": [
+        "RECEIVE_BOOT_COMPLETED",
+        "SCHEDULE_EXACT_ALARM",
+        "POST_NOTIFICATIONS"
+      ]
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    }
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#0D9488"
+        }
+      ],
+      "expo-secure-store",
+      "expo-sqlite"
+    ]
   }
 }
