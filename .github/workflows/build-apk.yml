@@ -5,6 +5,9 @@ on:
     branches: [main, master]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     name: Build Android Release APK
@@ -43,9 +46,35 @@ jobs:
           cd android
           ./gradlew assembleRelease --no-daemon
 
+      - name: Rename APK for clarity
+        run: |
+          mkdir -p release-output
+          cp android/app/build/outputs/apk/release/*.apk release-output/DailyToDoApp-v1.0.0.apk
+
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: DailyToDoApp-Release-APK
-          path: android/app/build/outputs/apk/release/*.apk
+          path: release-output/DailyToDoApp-v1.0.0.apk
           retention-days: 30
+
+      - name: Create GitHub Release with APK Asset
+        uses: softprops/action-gh-release@v2
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        with:
+          tag_name: v1.0.0
+          name: Daily To-Do App v1.0.0 Release
+          body: |
+            ## Daily To-Do & Productivity Tracker Mobile Application (v1.0.0)
+            
+            - **Platform**: Android
+            - **Architecture**: 100% Offline with Expo SQLite & SecureStore
+            - **First-Time Access Gate Passcode**: `SatyamMishraToDoApp2026`
+            
+            ### Installation Instructions:
+            1. Download the **`DailyToDoApp-v1.0.0.apk`** asset attached below.
+            2. Open the file on your Android phone and install.
+            3. Enter your access code on first launch to unlock your offline dashboard.
+          files: release-output/DailyToDoApp-v1.0.0.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
