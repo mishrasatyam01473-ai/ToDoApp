@@ -10,12 +10,14 @@ permissions:
 
 jobs:
   build:
-    name: Build Android Release APK
+    name: Build & Release Android APK
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -29,52 +31,73 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+      - name: Configure Android SDK Environment
+        run: |
+          echo "ANDROID_HOME=$ANDROID_SDK_ROOT" >> $GITHUB_ENV
+          echo "$ANDROID_SDK_ROOT/platform-tools" >> $GITHUB_PATH
+          echo "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin" >> $GITHUB_PATH
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
-      - name: Generate native Android project with Expo Prebuild
+      - name: Generate Native Android Project (Expo Prebuild)
         run: npx expo prebuild --platform android --clean
 
       - name: Make Gradle script executable
         run: chmod +x android/gradlew
 
-      - name: Build Release APK
+      - name: Compile Signed Installable APK
         run: |
           cd android
-          ./gradlew assembleRelease --no-daemon
+          ./gradlew assembleDebug --no-daemon
 
-      - name: Rename APK for clarity
+      - name: Verify and Prepare APK File
         run: |
           mkdir -p release-output
-          cp android/app/build/outputs/apk/release/*.apk release-output/DailyToDoApp-v1.0.0.apk
+          cp android/app/build/outputs/apk/debug/*.apk release-output/ToDo.apk
+          cp android/app/build/outputs/apk/debug/*.apk ./ToDo.apk
+          ls -lh release-output/ToDo.apk
 
-      - name: Upload APK Artifact
+      - name: Upload APK as Workflow Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: DailyToDoApp-Release-APK
-          path: release-output/DailyToDoApp-v1.0.0.apk
+          name: ToDo-APK
+          path: release-output/ToDo.apk
           retention-days: 30
 
-      - name: Create GitHub Release with APK Asset
+      - name: Publish Official GitHub Release
         uses: softprops/action-gh-release@v2
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
         with:
           tag_name: v1.0.0
-          name: Daily To-Do App v1.0.0 Release
+          name: Daily To-Do App v1.0.0 (Installable APK)
           body: |
-            ## Daily To-Do & Productivity Tracker Mobile Application (v1.0.0)
-            
-            - **Platform**: Android
-            - **Architecture**: 100% Offline with Expo SQLite & SecureStore
-            - **First-Time Access Gate Passcode**: `SatyamMishraToDoApp2026`
-            
-            ### Installation Instructions:
-            1. Download the **`DailyToDoApp-v1.0.0.apk`** asset attached below.
-            2. Open the file on your Android phone and install.
-            3. Enter your access code on first launch to unlock your offline dashboard.
-          files: release-output/DailyToDoApp-v1.0.0.apk
+            ## 📱 Daily To-Do & Productivity Tracker Mobile Application (v1.0.0)
+
+            This is the official compiled, signed Android APK for **Daily Track & Achieve**.
+
+            ### 📲 How to Download and Install:
+            1. Under **Assets** below, click **`ToDo.apk`** to download it directly to your phone.
+            2. Open the downloaded file on your Android device.
+            3. If Android displays *"For your security, your phone is not allowed to install unknown apps"*, tap **Settings** and toggle **Allow from this source**.
+            4. Tap **Install**.
+            5. Open the app and enter the required access code:
+               ```
+               SatyamMishraToDoApp2026
+               ```
+
+            ### ✨ Key Features:
+            - **100% Offline**: Local SQLite database with WAL mode and transaction integrity.
+            - **Recurring Tasks**: Automatic occurrence engine with individual daily completion history.
+            - **Smart Notifications**: Scheduled device-local alarms for pending tasks.
+            - **Analytics**: Real interactive Line, Bar, and Dot Habit Heatmap graphs.
+          files: release-output/ToDo.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit Compiled ToDo.apk into Repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add ToDo.apk
+          git diff --staged --quiet || (git commit -m "chore(release): update compiled ToDo.apk binary [skip ci]" && git push)

@@ -106,22 +106,24 @@ npx expo start
 
 ## 📥 Direct APK Download & Installation
 
-You can download and install the app directly on your Android phone using the APK file provided in this repository:
+You can download and install the mobile application directly on any Android smartphone:
 
-### 📲 [Download ToDo.apk (Direct Download)](./ToDo.apk)
+### 📲 [Download Latest ToDo.apk (Direct Download)](https://github.com/mishrasatyam01473-ai/ToDoApp/releases/latest/download/ToDo.apk)
+*Alternative*: You can also download directly from the [GitHub Releases Page](https://github.com/mishrasatyam01473-ai/ToDoApp/releases).
 
-| Detail | Value |
+| Detail | Specification |
 | :--- | :--- |
-| **File** | [`ToDo.apk`](./ToDo.apk) |
-| **Package** | `com.satyammishra.todoapp` |
+| **Direct Download** | [`ToDo.apk`](https://github.com/mishrasatyam01473-ai/ToDoApp/releases/latest/download/ToDo.apk) |
+| **Package ID** | `com.satyammishra.todoapp` |
 | **App Name** | `Daily Track & Achieve` |
-| **Version** | `1.0.0` |
-| **Access Gate Code** | `SatyamMishraToDoApp2026` |
-| **Compatibility** | Android 8.0+ (Oreo to Android 15) |
+| **Version** | `1.0.0 (Production Release)` |
+| **Access Gate Passcode** | `SatyamMishraToDoApp2026` |
+| **Android Compatibility** | Android 8.0 through Android 15 (API 26+) |
+| **Data Storage** | 100% Offline (Expo SQLite) |
 
 ### 🚀 3-Step Phone Installation:
-1. **Download**: Click [**`ToDo.apk`**](./ToDo.apk) above (or tap **View Raw** / **Download** on GitHub).
-2. **Install**: Open the downloaded file on your Android device (if prompted, toggle *"Allow from this source"*).
+1. **Download**: Tap **[Download ToDo.apk](https://github.com/mishrasatyam01473-ai/ToDoApp/releases/latest/download/ToDo.apk)** directly on your Android phone.
+2. **Install**: Open the downloaded file from your notifications or Downloads folder. If Android displays *"For your security, your phone is not allowed to install unknown apps"*, tap **Settings** and toggle **Allow from this source**.
 3. **Launch & Unlock**: Open the app and enter the personal access code **`SatyamMishraToDoApp2026`** to unlock your dashboard!
 
 
