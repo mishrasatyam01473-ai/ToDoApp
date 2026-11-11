@@ -38,7 +38,7 @@ jobs:
           echo "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin" >> $GITHUB_PATH
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: Generate Native Android Project (Expo Prebuild)
         run: npx expo prebuild --platform android --clean
