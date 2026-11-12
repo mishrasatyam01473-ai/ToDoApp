@@ -108,8 +108,10 @@ npx expo start
 
 You can download and install the mobile application directly on any Android smartphone:
 
-### 📲 [Download Latest ToDo.apk (Direct Download)](https://github.com/mishrasatyam01473-ai/ToDoApp/releases/latest/download/ToDo.apk)
-*Alternative*: You can also download directly from the [GitHub Releases Page](https://github.com/mishrasatyam01473-ai/ToDoApp/releases).
+### 📲 [Download Latest ToDo.apk (Direct Download from Release)](https://github.com/mishrasatyam01473-ai/ToDoApp/releases/latest/download/ToDo.apk)
+- **Direct Link (Releases)**: [Download ToDo.apk](https://github.com/mishrasatyam01473-ai/ToDoApp/releases/latest/download/ToDo.apk)
+- **Direct Link (Repository File)**: [Download ToDo.apk from Repository](https://github.com/mishrasatyam01473-ai/ToDoApp/raw/main/ToDo.apk)
+- **All Releases**: [GitHub Releases Page](https://github.com/mishrasatyam01473-ai/ToDoApp/releases)
 
 | Detail | Specification |
 | :--- | :--- |
